@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +24,11 @@ class _HomeState extends State<Home> {
   List<String> compras = [];
 
 
-  Future<String> _insertarCompra(BuildContext context) {
+  /*
+  * Este metodo muestra muestra en pantalla un mensaje para introducir
+  * un nuevo producto en la lista
+  * */
+  Future<String> _nuevaCompra(BuildContext context) {
     return showDialog(
       context: context,
       builder: (context){
@@ -51,6 +57,13 @@ class _HomeState extends State<Home> {
         );
       }
     );
+  }
+
+  _addProducto(String producto){
+    if(producto != "" && !compras.contains(producto))
+    setState(() {
+        compras.add(producto);
+    });
   }
 
   @override
@@ -97,11 +110,13 @@ class _HomeState extends State<Home> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _insertarCompra(context).then((onValue){
+          _nuevaCompra(context).then((onValue){
             //Aquí tenemos acceso al string devuelto por _insertarCompra
-            setState(() {
-              compras.add(onValue);
-            });
+            /*setState(() {
+              if(onValue != "" && !compras.contains(onValue))
+                compras.add(onValue);
+            })*/;
+            _addProducto(onValue);
           });
         },
         elevation: 0,
