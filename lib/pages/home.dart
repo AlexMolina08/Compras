@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -60,10 +59,11 @@ class _HomeState extends State<Home> {
   }
 
   _addProducto(String producto){
-    if(producto != "" && !compras.contains(producto))
-    setState(() {
+    if(producto != "" && !compras.contains(producto)) {
+      setState(() {
         compras.add(producto);
-    });
+      });
+    }
   }
 
   @override
@@ -132,12 +132,44 @@ class _HomeState extends State<Home> {
         child: ListView.builder(
           itemCount: compras.length,
           itemBuilder: (BuildContext context , int index){
-            return Card(child: ListTile(title: Text('${compras[index]}',
-              style: TextStyle(
-                  fontFamily: 'MerriweatherSans',
-                  fontSize: 20
+            final compra = compras[index];
+            return Card(child: Dismissible(
+              background: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [Colors.red,Colors.orange
+                    ]
+                  )
+                ),
               ),
-            )
+              key: Key(compra),
+              onDismissed: (direction){
+                //Cuando hallamos hecho swipe , eliminamos el item
+                setState(() {
+                  compras.removeAt(index);
+                });
+
+                //Luego mostramos un mensaje
+
+                Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text("$compra eliminado de la lista",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold
+                  ),),
+                  backgroundColor: Colors.red,
+                ));
+
+              },
+              child: ListTile(title: Text('${compras[index]}',
+                  style: TextStyle(
+                    fontFamily: 'MerriweatherSans',
+                    fontSize: 20
+                ),
+              )
+              ),
             )
             );
           }
