@@ -19,10 +19,10 @@ class _HomeState extends State<Home> {
 
   TextEditingController _textController = TextEditingController();
 
-  List<String> compras = ["Pan","tiramisu"];
+  List<String> compras = [];
 
 
-  _insertarCompra(BuildContext context){
+  Future<String> _insertarCompra(BuildContext context) {
     return showDialog(
       context: context,
       builder: (context){
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
               elevation: 5.0,
               child: Icon(Icons.check),
               onPressed: (){
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(_textController.text.toString());
               },
             ),
 
@@ -97,7 +97,12 @@ class _HomeState extends State<Home> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _insertarCompra(context);
+          _insertarCompra(context).then((onValue){
+            //Aquí tenemos acceso al string devuelto por _insertarCompra
+            setState(() {
+              compras.add(onValue);
+            });
+          });
         },
         elevation: 0,
         child: Icon(Icons.shopping_basket),
@@ -112,7 +117,13 @@ class _HomeState extends State<Home> {
         child: ListView.builder(
           itemCount: compras.length,
           itemBuilder: (BuildContext context , int index){
-            return Card(child: ListTile(title: Text('${compras[index]}'))
+            return Card(child: ListTile(title: Text('${compras[index]}',
+              style: TextStyle(
+                  fontFamily: 'MerriweatherSans',
+                  fontSize: 20
+              ),
+            )
+            )
             );
           }
         ),
