@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 
 /*
 *  Este widget consistirá de:
@@ -14,35 +14,55 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  @override
+  void initState(){
+    super.initState();
+    SystemChrome.setEnabledSystemUIOverlays([]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(50)
-          )
+      backgroundColor: Colors.grey[200],
+      appBar: PreferredSize(
+        preferredSize: Size(double.infinity, 35), // 44 is the height
+        child: AppBar(
+          backgroundColor: Colors.greenAccent,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(50)
+            )
+          ),
+          title: Text("Tu lista de la compra",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
+            fontFamily: 'Lobster',
+            fontSize: 30
+          ),),
+          centerTitle: true,
         ),
-        title: Text("Tu lista de la compra",
-        style: TextStyle(
-
-        ),),
-        centerTitle: true,
       ),
 
-      body: Container(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            print("Has pulsado");
+          });
+        },
+        elevation: 0,
+        backgroundColor: Colors.greenAccent,
+      ),
 
-        child: Center(
-          child: Text("Hola!",
-            style: TextStyle(
-              fontSize: 48.0,
-              fontWeight:  FontWeight.bold,
-              color: Colors.black
-          ),
-          )
-        )
-      )
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+
+      //CUERPO DEL SCAFFOLD
+
+
+
 
     );
   }
