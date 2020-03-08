@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -15,6 +16,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  TextEditingController _textController = TextEditingController();
+
+  List<String> compras = ["Pan","tiramisu"];
+
   @override
   void initState(){
     super.initState();
@@ -26,13 +31,13 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 35), // 44 is the height
+        preferredSize: Size(double.infinity, 45), // 44 is the height
         child: AppBar(
           backgroundColor: Colors.greenAccent,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(50)
+              bottom: Radius.circular(34)
             )
           ),
           title: Text("Tu lista de la compra",
@@ -53,6 +58,7 @@ class _HomeState extends State<Home> {
           });
         },
         elevation: 0,
+        child: Icon(Icons.shopping_basket),
         backgroundColor: Colors.greenAccent,
       ),
 
@@ -61,7 +67,14 @@ class _HomeState extends State<Home> {
 
       //CUERPO DEL SCAFFOLD
 
-
+      body: ListView.builder(
+        itemCount: compras.length,
+        itemBuilder: (BuildContext context , int index){
+          return ListTile(
+            title: Text('${compras[index]}'),
+          );
+        }
+      )
 
 
     );
