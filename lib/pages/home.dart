@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 * */
 
 
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -110,12 +111,7 @@ class _HomeState extends State<Home> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _nuevaCompra(context).then((onValue){
-            //Aquí tenemos acceso al string devuelto por _insertarCompra
-            /*setState(() {
-              if(onValue != "" && !compras.contains(onValue))
-                compras.add(onValue);
-            })*/;
+            _nuevaCompra(context).then((onValue){
             _addProducto(onValue);
           });
         },
@@ -124,7 +120,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.orange,
       ),
 
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
       //CUERPO DEL SCAFFOLD.
       body: Padding(
@@ -174,7 +170,27 @@ class _HomeState extends State<Home> {
             );
           }
         ),
-      )
+      ),
+
+
+        bottomNavigationBar: BottomNavigationBar(
+
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_basket),
+              title: Text('Cesta'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              title: Text('Productos'),
+            ),
+          ],
+
+
+
+
+
+        )
 
 
     );
