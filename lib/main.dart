@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:compras/pages/home.dart';
+import 'package:compras/pages/miCompra.dart';
 
 void main() => runApp(MaterialApp(
     title: "Compras",
     routes: {
-      '/' : (context) => Home(),
+      '/' : (context) => MiCompra()
    }
 
 ));
