@@ -8,6 +8,9 @@ class ProductosPage extends StatefulWidget {
 class _ProductosPageState extends State<ProductosPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: const Text("Aqui van los productos más recientes" , style: TextStyle(fontWeight: FontWeight.bold,
+          fontSize: 20.0),)
+    );
   }
 }

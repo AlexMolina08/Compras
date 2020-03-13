@@ -8,13 +8,9 @@ class MiCompraPage extends StatefulWidget {
 class _MiCompraPageState extends State<MiCompraPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.amber,
-        elevation: 0,
-        centerTitle: true,
-        title: Text("Tu lista de la compra"),
-      ),
+    return Center(
+      child: const Text("Aqui va la lista de la compra" , style: TextStyle(fontWeight: FontWeight.bold,
+      fontSize: 20.0),)
     );
   }
 }
