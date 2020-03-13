@@ -17,7 +17,30 @@ class MyNavBar extends StatefulWidget {
   _MyNavBarState createState() => _MyNavBarState();
 }
 
-class _MyNavBarState extends State<MyNavBar> {
+class _MyNavBarState extends State<MyNavBar> with SingleTickerProviderStateMixin{
+
+  double radioBurbuja;
+  AnimationController _controller;
+  
+  @override
+  void initState(){
+    super.initState();
+    radioBurbuja = 0;
+    _controller = AnimationController(duration: Duration(milliseconds: 300) , vsync: this);
+  }
+
+  @override
+  void didUpdateWidget(MyNavBar oldWidget){
+    super.didUpdateWidget(oldWidget);
+    if(oldWidget.activeIndex != widget.activeIndex){
+      _startAnimation();
+    }
+  }
+
+
+  void _startAnimation(){
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +51,28 @@ class _MyNavBarState extends State<MyNavBar> {
 
           children: <Widget>[
             for(var i = 0 ; i < widget.icons.length; ++i)
-              IconButton(icon:Icon(widget.icons[i]) ,
-                color :
-                  i == widget.activeIndex ? Colors.yellow[700] : Colors.black,
-                onPressed: () => widget.onPressed(i),
+              CustomPaint(
+                painter: BeaconPainter(),
+                child:IconButton(icon:Icon(widget.icons[i]) ,
+                  color :
+                  i == widget.activeIndex ? Colors.purple : Colors.black,
+                  onPressed: () => widget.onPressed(i),
+                ) //Mostramos todos los iconos
+              )
 
-
-              ) //Mostramos todos los iconos
           ],)
     );
   }
+}
+
+
+class BeaconPainter extends CustomPainter{
+
+  @override
+  void paint(Canvas canvas , Size size){
+
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
