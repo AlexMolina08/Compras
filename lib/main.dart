@@ -1,9 +1,13 @@
 import 'package:compras/pages/productosPage.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:compras/pages/miCompraPage.dart';
 import 'package:compras/widgets/barraNavegacion.dart';
 
-void main() => runApp(App());
+void main() {
+
+  runApp(App());
+}
 
 
 
@@ -31,17 +35,28 @@ class _PrincipalState extends State<Principal> {
   var navIndex = 0; //Indice de la pagina actual
 
 
-  //Creo una lista que no se puede modificar con las dos páginas a navegar
+  //lista que no se puede modificar con las páginas a navegar
   final pages = List.unmodifiable(  <Widget>[
     MiCompraPage(),
     ProductosPage()
   ]);
 
+
+  //lista con los iconos
+  final iconList = List<IconData>.unmodifiable([
+    Icons.add_shopping_cart,
+    Icons.fastfood
+  ]);
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[navIndex],
-      bottomNavigationBar: MyNavBar()
+      bottomNavigationBar: MyNavBar(icons: iconList ,
+          //La funcion onPressed que le pasamos a MyNavBar actualiza el index volviendo a llamar al build del AppBar
+          onPressed: (i) => setState( ()=> navIndex = i),
+          activeIndex: navIndex)
     );
   }
 }
