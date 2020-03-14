@@ -1,39 +1,37 @@
-import 'package:compras/pages/productosPage.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:compras/custom_navigation_bar.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:compras/pages/miCompraPage.dart';
-import 'package:compras/widgets/barraNavegacion.dart';
+import 'package:compras/pages/productosPage.dart';
 
-void main() {
 
-  runApp(App());
-}
 
+void main() => runApp(App());
 
 
 class App extends StatelessWidget {
+
+  //Raíz de la Aplicación
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Compras",
-      home: Principal());
+      title: 'Compras',
+      home: MyHomePage(title: 'compras')
+    );
   }
 }
-/*
-*
-* La pagina Principal es la que sabe el indice de pagina actual en la que
-* nos encontramos
-*
-* */
 
-class Principal extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
   @override
-  _PrincipalState createState() => _PrincipalState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _PrincipalState extends State<Principal> {
-  var navIndex = 0; //Indice de la pagina actual
-
+class _MyHomePageState extends State<MyHomePage> {
+  int navIndex = 0;
 
   //lista que no se puede modificar con las páginas a navegar
   final pages = List.unmodifiable(  <Widget>[
@@ -53,11 +51,34 @@ class _PrincipalState extends State<Principal> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[navIndex],
-      bottomNavigationBar: MyNavBar(icons: iconList ,
-          //La funcion onPressed que le pasamos a MyNavBar actualiza el index volviendo a llamar al build del AppBar
-          onPressed: (i) => setState( ()=> navIndex = i),
-          activeIndex: navIndex)
+      bottomNavigationBar: _buildCustomIconDesign()
     );
   }
-}
 
+  Widget _buildCustomIconDesign() {
+    return
+        CustomNavigationBar(
+          iconSize: 30.0,
+          selectedColor: Colors.orange[800],
+          strokeColor: Colors.amberAccent,
+          elevation: 0,
+          unSelectedColor: Colors.grey[600],
+          backgroundColor: Colors.white,
+          items: [
+            CustomNavigationBarItem(
+              icon: Icons.shopping_cart
+            ),
+            CustomNavigationBarItem(
+              icon: Icons.fastfood
+            ),
+          ],
+          currentIndex: navIndex,
+          onTap: (index) {
+            setState(() {
+              navIndex = index;
+            });
+          },
+        );
+  }
+
+}
