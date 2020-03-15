@@ -1,4 +1,7 @@
+import 'dart:ffi';
 import 'package:flutter/material.dart';
+import 'package:compras/src/producto.dart';
+import 'package:compras/src/carroVacio.dart';
 
 class MiCompraPage extends StatefulWidget {
   @override
@@ -9,65 +12,89 @@ class _MiCompraPageState extends State<MiCompraPage> {
 
   @override
   Widget build(BuildContext context) {
-    return setPage();
-  }
+    return Scaffold(
+      appBar: CompraAppBar(),
 
+      body: ComprasListView()
 
-
-
-
-  //AppBar
-  Widget setPage() {
-    Color red800 = Colors.red[800];
-    return Stack(
-      children: <Widget>[
-        Container(     // Background
-          child: Center(
-            child: Text("Tu lista de la compra", style: TextStyle(fontSize: 25.0,
-                fontWeight: FontWeight.w600,
-                color: Colors.white),),),
-          color: Colors.orange[800],
-          height: MediaQuery.of(context).size.height * 0.12,
-          width: MediaQuery.of(context).size.width,
-        ),
-
-        Container(),   // Required some widget in between to float AppBar
-
-        Positioned(    // To take AppBar Size only
-          top: 80.0,
-          left: 40.0,
-          right: 40.0,
-          child: Container(
-            //TextField
-            child: AppBar(
-              backgroundColor: Colors.white,
-              primary: false,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(30), top: Radius.circular(30))
-              ),
-              title: TextField(
-                  decoration: InputDecoration(
-                      hintText: "Añade a la lista",
-                      border: InputBorder.none,
-                      hintStyle: TextStyle(color: Colors.grey))),
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.add, color: Colors.orange[800]), onPressed: () {
-                    setState(
-                        () {
-
-                        }
-                    );
-                },),
-              ],
-            ),
-          ),
-        )
-
-      ],
     );
   }
+
 }
 
+
+
+//---APPBAR----
+class CompraAppBar extends StatelessWidget implements PreferredSizeWidget{
+  final String title;
+  final Widget child;
+  final Function onPressed;
+  final Function onTitleTapped;
+
+  CompraAppBar({@required this.title,
+    @required this.child,
+    @required this.onPressed,
+    this.onTitleTapped})
+      : preferredSize = Size.fromHeight(60.0);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Colors.white70,
+      centerTitle: true,
+      title: Text("Lista de la compra",
+        style: TextStyle(
+          fontFamily: 'Playfair',
+          fontSize: 23,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1,
+          color: Colors.orange[800]
+        ),
+      ),
+      actions: <Widget>[
+        IconButton(
+          onPressed: (){
+
+          },
+          icon: Icon(Icons.add , color: Colors.orange[800], size: 30,),
+        )
+      ],
+
+    );
+  }
+  @override
+  final Size preferredSize;
+}
+
+
+
+class ComprasListView extends StatefulWidget {
+  @override
+  _ComprasListViewState createState() => _ComprasListViewState();
+}
+
+class _ComprasListViewState extends State<ComprasListView> {
+
+  List<Producto> productos = [
+    Producto(nombre: "Almejas" , tipo: "Pescado" , cantidad: 12)
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+
+    return (productos.isEmpty)
+        ? IconoCarro()
+
+        : ListView.builder(itemCount: productos.length,
+
+            itemBuilder: (BuildContext context , int index){
+                return productos[index];
+            }
+
+        );
+
+  }
+}
 
 

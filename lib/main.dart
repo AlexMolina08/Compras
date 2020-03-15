@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
         CustomNavigationBar(
           iconSize: 30.0,
           selectedColor: Colors.orange[800],
-          strokeColor: Colors.amberAccent,
+          strokeColor: Colors.blueGrey[100],
           elevation: 0,
           unSelectedColor: Colors.grey[600],
           backgroundColor: Colors.white,
