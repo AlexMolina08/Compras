@@ -52,6 +52,8 @@ class CompraAppBar extends StatelessWidget implements PreferredSizeWidget{
           color: Colors.orange[800]
         ),
       ),
+
+      //---AÑADIR COMPRA---
       actions: <Widget>[
         IconButton(
           onPressed: (){
@@ -77,7 +79,9 @@ class ComprasListView extends StatefulWidget {
 class _ComprasListViewState extends State<ComprasListView> {
 
   List<Producto> productos = [
-    Producto(nombre: "Almejas" , tipo: "Pescado" , cantidad: 12)
+    Producto(nombre: "Almejas" , tipo: "fish" , cantidad: 12),
+    Producto(nombre: "Carne" , tipo:"meat" , cantidad: 20),
+    Producto(nombre: "Donuts" , tipo: "shower" , cantidad: 20)
   ];
 
   @override
@@ -85,9 +89,7 @@ class _ComprasListViewState extends State<ComprasListView> {
 
     return (productos.isEmpty)
         ? IconoCarro()
-
         : ListView.builder(itemCount: productos.length,
-
             itemBuilder: (BuildContext context , int index){
                 return productos[index];
             }

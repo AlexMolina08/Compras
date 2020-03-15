@@ -19,19 +19,25 @@ class Producto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListTile(
-          title: Text("$nombre",
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListTile(
+        leading: TipoProducto(tipo:"$tipo"),
+        title: Center(child:Text("$nombre",
           style: TextStyle(
-              fontFamily: 'Playfair',
-              fontSize: 20.0
-          )),
-          leading: TipoProducto(tipo: "Pescado"),
-          onTap: (){},
+            fontFamily: 'Playfair',
+            fontSize: 25
+          ))),
+        subtitle: Center(child: Text("x $cantidad",
+        style: TextStyle(
+          color: Colors.red,
+          fontFamily: 'Playfair',
+          fontSize: 20,
+          fontWeight: FontWeight.bold
+        ),),),
+        trailing: IconButton( icon: Icon(Icons.check)
         ),
-      )
+      ),
     );
   }
 }
