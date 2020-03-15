@@ -56,7 +56,9 @@ class CompraAppBar extends StatelessWidget implements PreferredSizeWidget{
       //---AÑADIR COMPRA---
       actions: <Widget>[
         IconButton(
-          onPressed: (){
+          onPressed: () async{
+
+            dynamic resultado = await Navigator.pushNamed(context, 'new');
 
           },
           icon: Icon(Icons.add , color: Colors.orange[800], size: 30,),
@@ -81,7 +83,7 @@ class _ComprasListViewState extends State<ComprasListView> {
   List<Producto> productos = [
     Producto(nombre: "Almejas" , tipo: "fish" , cantidad: 12),
     Producto(nombre: "Carne" , tipo:"meat" , cantidad: 20),
-    Producto(nombre: "Donuts" , tipo: "shower" , cantidad: 20)
+    Producto(nombre: "Donuts" , tipo: "dessert" , cantidad: 20)
   ];
 
   @override

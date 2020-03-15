@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:compras/custom_navigation_bar.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:compras/pages/newProductPage.dart';
 import 'package:compras/pages/miCompraPage.dart';
 import 'package:compras/pages/productosPage.dart';
 
@@ -16,7 +16,13 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Compras',
-      home: MyHomePage(title: 'compras')
+      initialRoute: '/',
+
+      routes: {
+        '/' : (context) => MyHomePage(title: 'compras') ,
+        'new' : (context) => NewProductPage()
+      },
+
     );
   }
 }
