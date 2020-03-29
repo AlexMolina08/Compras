@@ -56,34 +56,33 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[navIndex],
-      bottomNavigationBar: _buildCustomIconDesign()
+          body: pages[navIndex],
+          bottomNavigationBar: _buildCustomIconDesign()
     );
   }
 
   Widget _buildCustomIconDesign() {
     return
         CustomNavigationBar(
-          iconSize: 30.0,
-          selectedColor: Colors.orange[800],
-          strokeColor: Colors.blueGrey[100],
-          elevation: 0,
-          unSelectedColor: Colors.grey[600],
-          backgroundColor: Colors.white,
-          items: [
-            CustomNavigationBarItem(
-              icon: Icons.shopping_cart
-            ),
-            CustomNavigationBarItem(
-              icon: Icons.fastfood
-            ),
-          ],
-          currentIndex: navIndex,
-          onTap: (index) {
-            setState(() {
-              navIndex = index;
-            });
-          },
+            iconSize: 30.0,
+            selectedColor: Colors.yellow[800],
+            strokeColor: Colors.blueGrey[100],
+            elevation: 0,
+            unSelectedColor: Colors.grey[600],
+            items: [
+              CustomNavigationBarItem(
+                icon: Icons.shopping_cart
+              ),
+              CustomNavigationBarItem(
+                icon: Icons.fastfood
+              ),
+            ],
+            currentIndex: navIndex,
+            onTap: (index) {
+              setState(() {
+                navIndex = index;
+              });
+            },
         );
   }
 

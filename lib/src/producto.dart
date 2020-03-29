@@ -21,23 +21,34 @@ class Producto extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ListTile(
-        leading: TipoProducto(tipo:"$tipo"),
-        title: Center(child:Text("$nombre",
-          style: TextStyle(
-            fontFamily: 'Playfair',
-            fontSize: 25
-          ))),
-        subtitle: Center(child: Text("x $cantidad",
-        style: TextStyle(
-          color: Colors.red,
-          fontFamily: 'Playfair',
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-        ),),),
-        trailing: IconButton( icon: Icon(Icons.check)
-        ),
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            leading: TipoProducto(tipo:"$tipo"),
+            title: Center(child:Text("$nombre",
+              style: TextStyle(
+                fontFamily: 'Playfair',
+                fontSize: 25
+              ))),
+            subtitle: Center(child: Text("x $cantidad",
+            style: TextStyle(
+              color: Colors.red,
+              fontFamily: 'Playfair',
+              fontSize: 20,
+              fontWeight: FontWeight.bold
+            ),),),
+            trailing: IconButton( icon: Icon(Icons.check),
+                onPressed: (){
+                },
+            ),
+          ),
+
+          Divider(
+            height: 5.0,
+          )
+        ],
       ),
+
     );
   }
 }

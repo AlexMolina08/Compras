@@ -14,8 +14,10 @@ class _MiCompraPageState extends State<MiCompraPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CompraAppBar(),
-
-      body: ComprasListView()
+      body: DecoratedBox(decoration: BoxDecoration(
+        image: DecorationImage(image:AssetImage("assets/background.jpg"),fit:BoxFit.cover)
+      ),
+          child: ComprasListView())
 
     );
   }
@@ -40,33 +42,36 @@ class CompraAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 0,
-      backgroundColor: Colors.white70,
-      centerTitle: true,
-      title: Text("Lista de la compra",
-        style: TextStyle(
-          fontFamily: 'Playfair',
-          fontSize: 23,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 1,
-          color: Colors.orange[800]
+        flexibleSpace: Image(
+          image: AssetImage("assets/background.jpg"),
+          fit: BoxFit.cover
         ),
-      ),
+        elevation: 0,
+        centerTitle: true,
+        title: Text("Lista de la compra",
+          style: TextStyle(
+            fontFamily: 'Playfair',
+            fontSize: 23,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+            color: Colors.orange[800]
+          ),
+        ),
 
-      //---AÑADIR COMPRA---
-      actions: <Widget>[
-        IconButton(
-          onPressed: () async{
+        //---AÑADIR COMPRA---
+        actions: <Widget>[
+          IconButton(
+            onPressed: () async{
 
-            dynamic resultado = await Navigator.pushNamed(context, 'new');
+              dynamic resultado = await Navigator.pushNamed(context, 'new');
 
-          },
-          icon: Icon(Icons.add , color: Colors.orange[800], size: 30,),
-        )
-      ],
-
+            },
+            icon: Icon(Icons.add , color: Colors.orange[800], size: 30,),
+          )
+        ],
     );
   }
+
   @override
   final Size preferredSize;
 }
